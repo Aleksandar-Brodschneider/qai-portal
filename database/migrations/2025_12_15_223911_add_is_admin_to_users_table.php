@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_admin')->default(false)->after('password');
+            // Dodamo stolpec is_admin takoj za email
+            $table->boolean('is_admin')
+                  ->default(false)
+                  ->after('email');
         });
     }
 
@@ -22,6 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            // Ob rollbacku odstranimo stolpec
             $table->dropColumn('is_admin');
         });
     }

@@ -4,7 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResearchController;
 use App\Models\User;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Hash;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -76,4 +78,7 @@ Route::post('/admin/bootstrap', function (Request $request) {
         'email' => $user->email,
         'is_admin' => (bool) $user->is_admin,
     ], 201);
+
 });
+// Ustvarjanje navadnih uporabnikov
+Route::post('/users', [UserController::class, 'store']);
