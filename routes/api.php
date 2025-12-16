@@ -80,5 +80,6 @@ Route::post('/admin/bootstrap', function (Request $request) {
     ], 201);
 
 });
-// Ustvarjanje navadnih uporabnikov
-Route::post('/users', [UserController::class, 'store']);
+// Users CRUD (DEV/test)
+Route::apiResource('users', UserController::class)
+    ->only(['index','show','store','update','destroy']);
