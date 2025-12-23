@@ -1,0 +1,13 @@
+# originalni repoji (vir za subtree)
+backend_repo/
+frontend_repo/
+
+# frontend
+node_modules/
+
+# backend
+.env
+
+# OS / editor
+.DS_Store
+.vscode/
