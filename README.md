@@ -46,14 +46,10 @@ qai-portal/
 
 ## Status projekta
 
-- ✔ Monorepo inicializiran
-- ✔ Backend CRUD (Users, Research)
-- ✔ Frontend SPA z routerjem
-- ✔ Admin vloga (DEV)
+- Monorepo inicializiran
+- Backend CRUD (Users, Research)
+- Frontend SPA z routerjem
+- Admin vloga (DEV)
 
 ---
 
-## Opomba
-
-Projekt je namenoma zasnovan iterativno.
-Dokumentacija (README) se bo širila skupaj z razvojem funkcionalnosti.
