@@ -98,7 +98,7 @@ const logout = () => {
         <!-- Če uporabnik JE prijavljen -->
         <template v-else>
 
-          <!-- ================= ADMIN ================= -->
+          <!-- ================= SAMO ADMIN ================= -->
           <!-- Če ima uporabnik administratorske pravice -->
           <template v-if="user.is_admin">
 

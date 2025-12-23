@@ -186,7 +186,10 @@ onMounted(async () => {
     </p>
 
     <p v-if="okMsg" class="ok">{{ okMsg }}</p>
-
+    <div class="row">
+    <RouterLink class="btn" to="/admin/users">Uredi uporabnike</RouterLink>
+    <RouterLink class="btn" to="/research">Uredi raziskave</RouterLink>
+    </div>
     <!-- USERS -->
     <section class="card">
       <div class="row">
@@ -206,7 +209,7 @@ onMounted(async () => {
             <th>Email</th>
             <th>Admin</th>
             <th>Ustvarjen</th>
-            <th>Akcije</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -216,11 +219,6 @@ onMounted(async () => {
             <td>{{ u.email }}</td>
             <td>{{ u.is_admin ? 'DA' : 'NE' }}</td>
             <td>{{ u.created_at }}</td>
-            <td>
-              <button class="btn danger" @click="deleteUser(u.id, u.is_admin)" :disabled="u.is_admin">
-                Delete
-              </button>
-            </td>
           </tr>
         </tbody>
       </table>
@@ -259,9 +257,7 @@ onMounted(async () => {
             <td class="wrap">{{ r.authors }}</td>
             <td>{{ r.year }}</td>
             <td class="wrap">{{ r.doi }}</td>
-            <td>
-              <button class="btn danger" @click="deleteResearch(r.id)">Delete</button>
-            </td>
+            
           </tr>
         </tbody>
       </table>
