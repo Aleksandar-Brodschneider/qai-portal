@@ -50,7 +50,6 @@ qai-portal/
 - ✔ Backend CRUD (Users, Research)
 - ✔ Frontend SPA z routerjem
 - ✔ Admin vloga (DEV)
-- ⏳ Nadaljnji razvoj v teku
 
 ---
 
