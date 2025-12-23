@@ -36,12 +36,15 @@ Projekt je trenutno v **razvojni (DEV) fazi** in ni namenjen produkcijski rabi.
 
 ---
 
-## Struktura repozitorija
+#### Struktura repozitorija
 
+```text
 qai-portal/
-├── backend/        # Laravel API (production-ready structure)
-├── frontend/       # Vue 3 + Vite frontend
-└── README.md
+├─ backend/          # Laravel API
+├─ frontend/         # Vue 3 + Vite (SPA)
+├─ backend_repo/     # subtree source (zgodovina backend-a)
+├─ frontend_repo/    # subtree source (zgodovina frontend-a)
+└─ README.md Struktura repozitorija
 ---
 
 ## Status projekta
