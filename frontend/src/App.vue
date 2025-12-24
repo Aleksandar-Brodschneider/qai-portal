@@ -37,7 +37,11 @@ const user = computed(() => {
     return null
   }
 })
-
+// Prikazno ime za navbar (fallback, če kaj manjka)
+const displayName = computed(() => {
+  if (!user.value) return ''
+  return user.value.name || user.value.email || 'Uporabnik'
+})
 /*
 |--------------------------------------------------------------------------
 | FUNKCIJA: LOGOUT
@@ -69,7 +73,11 @@ const logout = () => {
       <div class="brand">
         QAI Portal
       </div>
-
+      <div class="nav-center">
+      <span v-if="user" class="user-pill">
+      {{ user.name }}
+      </span>
+      </div>
       <!-- Navigacijski meni -->
       <nav class="links">
 
@@ -141,14 +149,25 @@ const logout = () => {
     <!-- ================= FOOTER ================= -->
     
       <footer class="footer">
-        <nav class="footer-links">
-          <a href="#" class="footer-link">Kontakt</a>
-          <span class="sep">•</span>
-          <a href="#" class="footer-link">FAQ</a>
-          <span class="sep">•</span>
-          <a href="#" class="footer-link">Social Media</a>
-        </nav>
-      </footer>
+  <!-- LEVO -->
+  <div class="footer-left">
+    QAI PORTAL
+  </div>
+
+  <!-- SREDINA -->
+  <nav class="footer-center">
+    <a href="#" class="footer-link">Kontakt</a>
+    <span class="sep">•</span>
+    <a href="#" class="footer-link">FAQ</a>
+    <span class="sep">•</span>
+    <a href="#" class="footer-link">Social Media</a>
+  </nav>
+
+  <!-- DESNO -->
+  <div class="footer-right">
+    © {{ new Date().getFullYear() }} QAI Portal Group
+  </div>
+</footer>
 
   </div>
 </template>
@@ -187,8 +206,10 @@ const logout = () => {
 }
 
 .brand {
-  font-weight: 700;                  /* Krepka pisava */
-  letter-spacing: 0.3px;             /* Razmik med črkami */
+  justify-self: start;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.4px;
 }
 
 .links {
@@ -243,18 +264,30 @@ const logout = () => {
 
 .footer {
   margin-top: 24px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(192, 41, 41, 0.12);
-  text-align: center;
+  padding: 14px 16px;
+  border-top: 5px solid rgba(243, 14, 14, 0.12);
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* levo | sredina | desno */
+  align-items: center;
+  line-height: 1;
   font-size: 13px;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
-.footer-links {
+.footer-left {
+  justify-self: start;
+}
+
+.footer-center {
+  justify-self: center;
+  transform: translateX(30px); /* premakne sredino desno */
   display: flex;
-  justify-content: center;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+.footer-right {
+  justify-self: end;
 }
 
 .footer-link {
@@ -268,5 +301,28 @@ const logout = () => {
 
 .sep {
   opacity: 0.5;
+}
+.nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.links {
+  justify-self: end;
+}
+
+/* sredina */
+.nav-center {
+  justify-self: center;
+}
+
+.user-pill {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  font-weight: 800;
 }
 </style>

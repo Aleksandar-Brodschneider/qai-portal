@@ -1,7 +1,5 @@
 <script setup>
-// HomeView je landing page aplikacije.
-// Tukaj NI logike za login, admin ali CRUD.
-// Namen: prvi vtis + navigacija.
+import heroImg from '../assets/hero.png'
 </script>
 
 <template>
@@ -10,10 +8,11 @@
     <!-- HERO SEKCIJA -->
     <section class="hero">
       <h1 class="title">QAI Portal</h1>
+
       <p class="subtitle">
         Raziskovalni portal za kvantno umetno inteligenco (QAI).
       </p>
-
+      <img :src="heroImg" alt="QAI illustration" class="hero-image" />
       <div class="actions">
         <RouterLink to="/login" class="btn primary">
           Prijava
@@ -62,7 +61,7 @@
 .home {
   display: grid;
   gap: 48px;
-  padding: 40px 20px;
+  padding: 1px 20px;
 }
 
 /* HERO */
@@ -76,8 +75,9 @@
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  opacity: 0.8;
+  font-size: 1.5rem;
+  opacity: 5.8;
+  font-weight: bold;
 }
 
 /* Gumbi */
@@ -131,5 +131,12 @@
 
 .card h2 {
   margin-top: 0;
+}
+.hero-image {
+  display: block;
+  margin: 24px auto 0;
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
 }
 </style>
