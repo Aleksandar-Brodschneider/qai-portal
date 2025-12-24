@@ -83,3 +83,37 @@ Route::post('/admin/bootstrap', function (Request $request) {
 // Users CRUD (DEV/test)
 Route::apiResource('users', UserController::class)
     ->only(['index','show','store','update','destroy']);
+/*
+|--------------------------------------------------------------------------
+| Login (DEV only – brez tokenov / Sanctum)
+|--------------------------------------------------------------------------
+| Namen: osnovna prijava uporabnika za frontend demo
+| URL: POST /api/login
+| Body (JSON):
+| {
+|   "email": "admin@qai-portal.test",
+|   "password": "Admin12345"
+| }
+*/
+Route::post('/login', function (Request $request) {
+
+    $data = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required', 'string'],
+    ]);
+
+    $user = User::where('email', $data['email'])->first();
+
+    if (! $user || ! Hash::check($data['password'], $user->password)) {
+        return response()->json([
+            'message' => 'Napačen email ali geslo.'
+        ], 401);
+    }
+
+    return response()->json([
+        'id' => $user->id,
+        'name' => $user->name,
+        'email' => $user->email,
+        'is_admin' => (bool) $user->is_admin,
+    ], 200);
+});    
