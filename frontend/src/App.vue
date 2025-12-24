@@ -139,13 +139,16 @@ const logout = () => {
     </main>
 
     <!-- ================= FOOTER ================= -->
-    <footer class="footer">
-      Frontend:
-      <code>http://localhost:5173</code>
-      •
-      Backend:
-      <code>http://127.0.0.1:8000</code>
-    </footer>
+    
+      <footer class="footer">
+        <nav class="footer-links">
+          <a href="#" class="footer-link">Kontakt</a>
+          <span class="sep">•</span>
+          <a href="#" class="footer-link">FAQ</a>
+          <span class="sep">•</span>
+          <a href="#" class="footer-link">Social Media</a>
+        </nav>
+      </footer>
 
   </div>
 </template>
@@ -156,7 +159,9 @@ const logout = () => {
 | OSNOVNI LAYOUT
 |--------------------------------------------------------------------------
 */
-
+:global(body) {
+  background: #111; /* test */
+}
 .app {
   max-width: 1000px;                 /* Maksimalna širina aplikacije */
   margin: 0 auto;                    /* Centriranje */
@@ -177,8 +182,8 @@ const logout = () => {
   gap: 12px;
   padding: 14px 16px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(185, 44, 44, 0.12);
+  background: rgba(190, 230, 13, 0.5);
 }
 
 .brand {
@@ -226,7 +231,7 @@ const logout = () => {
   padding: 16px;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(171, 238, 15, 0.3);
   min-height: 320px;
 }
 
@@ -237,8 +242,31 @@ const logout = () => {
 */
 
 .footer {
-  margin-top: 14px;
-  opacity: 0.65;                     /* Manj poudarjen tekst */
-  font-size: 12px;
+  margin-top: 24px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(192, 41, 41, 0.12);
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.sep {
+  opacity: 0.5;
 }
 </style>

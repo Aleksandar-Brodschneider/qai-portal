@@ -1,79 +1,148 @@
+/* :root = globalne CSS spremenljivke / privzete nastavitve za cel dokument */
+
 :root {
+    /* privzeta pisava za celo aplikacijo */
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    /* razmik med vrsticami besedila */
     line-height: 1.5;
+    /* debelina pisave (400 = normal) */
     font-weight: 400;
+    /* browserju pove: podpiramo light + dark barvno shemo */
+    /* pomembno: vpliva na privzete forme, scrollbare ipd. */
     color-scheme: light dark;
+    /* privzeta barva besedila (skoraj bela) */
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    /* privzeta barva ozadja celotne strani (ti si dal modro) */
+    background-color: #0c1bc7;
+    /* omogoča/ureja “umetno” odebelitev ali poševnino, če font nima rezov */
     font-synthesis: none;
+    /* izboljša prikaz teksta (kerning/ligature/itd. odvisno od browserja) */
     text-rendering: optimizeLegibility;
+    /* glajenje fonta na webkit (Safari/Chrome) */
     -webkit-font-smoothing: antialiased;
+    /* glajenje fonta na macOS (Firefox) */
     -moz-osx-font-smoothing: grayscale;
 }
 
+
+/* privzeti stil za vse linke <a> */
+
 a {
+    /* malo bolj “težak” link */
     font-weight: 500;
+    /* privzeta barva linka */
     color: #646cff;
+    /* odstrani podčrtano, ker prevzame "inherit" (torej brez underline) */
     text-decoration: inherit;
 }
 
+
+/* hover stil za linke */
+
 a:hover {
+    /* link postane malo temnejši */
     color: #535bf2;
 }
 
+
+/* globalni layout za celo stran */
+
 body {
     margin: 0;
+    /* body postane flex container in vse se začne centrirat */
     display: flex;
+    /* place-items center = kratko za align-items + justify-items
+     (pri flexu ti praktično centrira vsebino) */
     place-items: center;
+    /* minimalna širina layouta */
     min-width: 320px;
+    /* višina vsaj čez cel ekran */
     min-height: 100vh;
 }
 
+
+/* globalni stil za h1 */
+
 h1 {
+    /* zelo velika naslovna pisava */
     font-size: 3.2em;
+    /* višina vrstice za naslov */
     line-height: 1.1;
 }
+
+
+/* globalni stil za vse <button> (tudi v App.vue) */
 
 button {
     border-radius: 8px;
     border: 1px solid transparent;
+    /* notranji odmik */
     padding: 0.6em 1.2em;
+    /* velikost teksta na gumbu */
     font-size: 1em;
+    /* malenkost debelejša pisava */
     font-weight: 500;
+    /* gumb prevzame font iz :root */
     font-family: inherit;
+    /* ozadje gumba */
     background-color: #1a1a1a;
+    /* roka, ko greš čez */
     cursor: pointer;
+    /* animacija pri hoveru (border) */
     transition: border-color 0.25s;
 }
+
+
+/* hover stil za gumb */
 
 button:hover {
     border-color: #646cff;
 }
+
+
+/* fokus stil (tipkovnica/tab) */
 
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
 }
 
+
+/* “card” utility class */
+
 .card {
     padding: 2em;
 }
 
+
+/* glavna Vue mount točka (#app) */
+
 #app {
+    /* širina vsebine */
     max-width: 1280px;
+    /* centriraj blok */
     margin: 0 auto;
+    /* padding okoli cele aplikacije */
     padding: 2rem;
+    /* centriranje vseh tekstov v aplikaciji */
     text-align: center;
 }
 
+
+/* media query: če ima uporabnik LIGHT MODE */
+
 @media (prefers-color-scheme: light) {
      :root {
+        /* v light načinu spremeni tekst v temnejšo barvo */
         color: #213547;
+        /* v light načinu spremeni ozadje v belo */
         background-color: #ffffff;
     }
+    /* hover linka v light */
     a:hover {
         color: #747bff;
     }
+    /* gumbi v light dobijo svetlejše ozadje */
     button {
         background-color: #f9f9f9;
     }
