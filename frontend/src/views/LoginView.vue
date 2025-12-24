@@ -65,18 +65,26 @@ const login = async () => {
 
     // Uspešna prijava: shranimo "session" v localStorage (DEV demo)
     // OPOMBA: To ni pravi auth (Sanctum pride kasneje) – to je samo demo.
-    localStorage.setItem('qai_user', JSON.stringify(data))
+    // Uspešna prijava: shrani user v localStorage
+localStorage.setItem('qai_user', JSON.stringify(data))
 
-    okMsg.value = `Prijavljen: ${data.name} (${data.email})`
+//povej App.vue, naj se osveži
+window.dispatchEvent(new Event('qai-user-changed'))
 
-    // Če je admin, ga peljemo na /admin, sicer na /
-    setTimeout(() => {
-      if (data.is_admin) router.push('/admin')
-      else router.push('/')
-    }, 500)
-  } catch (e) {
+okMsg.value = `Prijavljen: ${data.name} (${data.email})`
+
+//redirect samo ENKRAT
+if (data.is_admin) router.push('/admin')
+else router.push('/')
+
+    
+  } 
+  
+  catch (e) {
     errorMsg.value = String(e?.message || e)
-  } finally {
+  } 
+  
+  finally {
     loading.value = false
   }
 }
@@ -84,6 +92,7 @@ const login = async () => {
 // Funkcija za odjavo (počisti localStorage)
 const logout = () => {
   localStorage.removeItem('qai_user')
+  window.dispatchEvent(new Event('qai-user-changed'))
   okMsg.value = 'Odjavljen.'
 }
 </script>
@@ -108,17 +117,13 @@ const logout = () => {
           {{ loading ? 'Prijavljam...' : 'Prijavi se' }}
         </button>
 
-        <button class="btn secondary" type="button" @click="logout" :disabled="loading">
-          Odjava (DEV)
-        </button>
+
       </div>
 
       <p v-if="errorMsg" class="error">Napaka: {{ errorMsg }}</p>
       <p v-if="okMsg" class="ok">{{ okMsg }}</p>
 
-      <p class="hint">
-        DEV opomba: prijava je “demo” brez tokenov (Sanctum bomo dodali kasneje).
-      </p>
+    
     </form>
   </main>
 </template>

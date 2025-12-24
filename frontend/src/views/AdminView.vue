@@ -175,21 +175,37 @@ onMounted(async () => {
 
 <template>
   <main class="page">
-    <h1>Admin (DEV)</h1>
-
-    <p class="hint">
-      Ta stran je “demo admin panel” brez Sanctuma. V produkciji bo zaščiten z middleware/tokeni.
-    </p>
-
-    <p v-if="currentUser" class="who">
-      Prijavljen: <b>{{ currentUser.name }}</b> ({{ currentUser.email }}) • is_admin={{ currentUser.is_admin }}
-    </p>
+    <h1>Administrator</h1>
 
     <p v-if="okMsg" class="ok">{{ okMsg }}</p>
-    <div class="row">
-    <RouterLink class="btn" to="/admin/users">Uredi uporabnike</RouterLink>
-    <RouterLink class="btn" to="/research">Uredi raziskave</RouterLink>
-    </div>
+    <!-- STATUS KARTICE (neklikabilne) -->
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-label">Uporabniki</div>
+        <div class="stat-value">
+          {{ loadingUsers ? '…' : users.length }}
+        </div>
+        <div class="stat-sub" v-if="errorUsers">Napaka pri nalaganju</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Raziskave</div>
+        <div class="stat-value">
+          {{ loadingResearch ? '…' : researches.length }}
+        </div>
+        <div class="stat-sub" v-if="errorResearch">Napaka pri nalaganju</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Administrator</div>
+        <div class="stat-value">
+          {{ currentUser?.name || '—' }}
+        </div>
+        <div class="stat-sub">
+          {{ currentUser?.email || '' }}
+        </div>
+      </div>
+    </section>
     <!-- USERS -->
     <section class="card">
       <div class="row">
@@ -246,7 +262,6 @@ onMounted(async () => {
             <th>Avtorji</th>
             <th>Leto</th>
             <th>DOI</th>
-            <th>Akcije</th>
           </tr>
         </thead>
         <tbody>
@@ -330,5 +345,36 @@ onMounted(async () => {
 .who {
   margin-top: 6px;
   opacity: 0.9;
+}
+.stats {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.stat {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+}
+
+.stat-label {
+  font-size: 12px;
+  opacity: 0.75;
+  letter-spacing: 0.3px;
+}
+
+.stat-value {
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.stat-sub {
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.7;
 }
 </style>

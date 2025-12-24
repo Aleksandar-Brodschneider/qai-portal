@@ -5,8 +5,7 @@
 |--------------------------------------------------------------------------
 */
 
-// Uvozimo computed in ref za reaktivne spremenljivke
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 
 // Uvozimo router, da lahko po odjavi preusmerimo uporabnika
 import { useRouter } from 'vue-router'
@@ -17,7 +16,17 @@ const router = useRouter()
 // Pomožna spremenljivka, ki prisili ponovno izrisovanje (re-render)
 // Uporabimo jo ob logout-u, ker localStorage sam po sebi ni reaktiven
 const tick = ref(0)
+const forceRefreshUser = () => {
+  tick.value++
+}
 
+onMounted(() => {
+  window.addEventListener('qai-user-changed', forceRefreshUser)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('qai-user-changed', forceRefreshUser)
+})
 /*
 |--------------------------------------------------------------------------
 | REAKTIVNI PODATEK: USER
@@ -56,7 +65,7 @@ const logout = () => {
 
   // Prisili ponovno izrisovanje menija
   tick.value++
-
+  window.dispatchEvent(new Event('qai-user-changed'))
   // Preusmerimo uporabnika na začetno stran
   router.push('/')
 }
@@ -75,7 +84,7 @@ const logout = () => {
       </div>
       <div class="nav-center">
       <span v-if="user" class="user-pill">
-      {{ user.name }}
+      {{ displayName }}
       </span>
       </div>
       <!-- Navigacijski meni -->
@@ -195,15 +204,33 @@ const logout = () => {
 */
 
 .nav {
-  display: flex;                     /* Flex layout */
-  align-items: center;               /* Vertikalna poravnava */
-  justify-content: space-between;    /* Razmak med logotipom in menijem */
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* logo | user | menu */
+  align-items: center;
   gap: 12px;
   padding: 14px 16px;
   border-radius: 14px;
   border: 1px solid rgba(185, 44, 44, 0.12);
   background: rgba(190, 230, 13, 0.5);
 }
+
+
+
+/* sredina */
+.nav-center {
+  justify-self: center;
+  transform: translateX(30px); /* premakne sredino desno */
+}
+
+.user-pill {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  font-weight: 800;
+}
+
 
 .brand {
   justify-self: start;
@@ -302,27 +329,6 @@ const logout = () => {
 .sep {
   opacity: 0.5;
 }
-.nav {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-}
 
-.links {
-  justify-self: end;
-}
 
-/* sredina */
-.nav-center {
-  justify-self: center;
-}
-
-.user-pill {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
-  font-weight: 800;
-}
 </style>

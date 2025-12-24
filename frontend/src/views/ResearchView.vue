@@ -5,15 +5,31 @@
 // user_id se bere iz localStorage (prijavljen user)
 // ---------------------------------------------
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { API_BASE } from '../config'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+// 1) Seznam research mora biti prej!
+const items = ref([])
+
+// 2) Query filter
+const q = computed(() => String(route.query.q || '').trim().toLowerCase())
+
+// 3) Filtriranje po title ali authors
+const filteredItems = computed(() => {
+  if (!q.value) return items.value
+  return items.value.filter((r) => {
+    const title = String(r.title || '').toLowerCase()
+    const authors = String(r.authors || '').toLowerCase()
+    return title.includes(q.value) || authors.includes(q.value)
+  })
+})
 
 // Preberemo prijavljenega uporabnika
 const rawUser = localStorage.getItem('qai_user')
 const currentUser = rawUser ? JSON.parse(rawUser) : null
-
-// Seznam research
-const items = ref([])
 
 // UX stanje
 const loading = ref(false)
@@ -229,11 +245,11 @@ onMounted(fetchResearch)
     </section>
 
     <!-- LIST -->
-    <section class="card">
+        <section class="card">
       <h2>Seznam raziskav</h2>
-
-      <table v-if="items.length" class="table">
-        <tr v-for="r in items" :key="r.id">
+      <p v-if="q" class="muted">Filter: <b>{{ q }}</b></p>
+      <table v-if="filteredItems.length" class="table">
+        <tr v-for="r in filteredItems" :key="r.id">
           <td>{{ r.id }}</td>
           <td>{{ r.title }}</td>
           <td>{{ r.year }}</td>
@@ -243,6 +259,8 @@ onMounted(fetchResearch)
           </td>
         </tr>
       </table>
+
+      <p v-else class="muted">Ni zadetkov.</p>
     </section>
 
     <!-- EDIT -->
@@ -258,7 +276,7 @@ onMounted(fetchResearch)
         <button class="btn">Shrani</button>
       </form>
     </section>
-
+    
     <p v-if="errorMsg" class="error">Napaka: {{ errorMsg }}</p>
     <p v-if="okMsg" class="ok">{{ okMsg }}</p>
   </main>
