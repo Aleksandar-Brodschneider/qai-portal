@@ -80,20 +80,20 @@ const logout = () => {
 
       <!-- Ime aplikacije -->
       <div class="brand">
-        QAI Portal
-      </div>
+      <span class="brand-text">QAIRP</span>
+
+      <RouterLink to="/" class="home-link" title="Home" aria-label="Home">
+        🏠
+      </RouterLink>
+    </div>
+      
       <div class="nav-center">
-      <span v-if="user" class="user-pill">
-      {{ displayName }}
-      </span>
+      
       </div>
       <!-- Navigacijski meni -->
       <nav class="links">
 
-        <!-- Vedno vidna povezava -->
-        <RouterLink to="/" class="link">
-          Home
-        </RouterLink>
+        
 
         <!-- ================= NI PRIJAVLJEN ================= -->
         <!-- Če uporabnik NI prijavljen -->
@@ -135,10 +135,12 @@ const logout = () => {
             </RouterLink>
 
           </template>
-
+          <span v-if="user" class="user-pill">
+          {{ displayName }}
+          </span>
           <!-- Gumb za odjavo -->
           <button
-            class="link btnlink"
+            class="link btnlink logout"
             type="button"
             @click="logout"
           >
@@ -191,7 +193,7 @@ const logout = () => {
   background: #111; /* test */
 }
 .app {
-  max-width: 1000px;                 /* Maksimalna širina aplikacije */
+  max-width: 1280px;                
   margin: 0 auto;                    /* Centriranje */
   padding: 16px;                     /* Notranji odmik */
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -227,18 +229,31 @@ const logout = () => {
   padding: 8px 12px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
   font-weight: 800;
+  background: rgba(255, 80, 80, 0.25);
+  border-color: rgba(255, 80, 80, 0.6);
+  color: #ffecec;
 }
 
 
 .brand {
   justify-self: start;
-  font-weight: 800;
-  font-size: 18px;
+  font-weight: 1000;
+  font-size: 28px;
   letter-spacing: 0.4px;
+  margin-left: 5px;
 }
-
+.brand-text {
+  font-weight: 1000;
+  font-size: 28px;
+  letter-spacing: 0.4px;
+  border-style: double;
+  border-width: 3px;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: rgb(216, 227, 20);
+  color: #074e1e;
+}
 .links {
   display: flex;
   gap: 10px;
@@ -250,7 +265,11 @@ const logout = () => {
 | POVEZAVE IN GUMBI
 |--------------------------------------------------------------------------
 */
-
+.home-link {
+  font-size: 34px;
+  padding: 6px 10px;
+  margin-left: 10px;
+}
 .link {
   text-decoration: none;
   padding: 8px 10px;
@@ -267,7 +286,15 @@ const logout = () => {
 .btnlink {
   cursor: pointer;                   /* Kazalec miške */
 }
+.logout {
+  background: rgba(255, 80, 80, 0.25);
+  border-color: rgba(255, 80, 80, 0.6);
+  color: #ffecec;
+}
 
+.logout:hover {
+  background: rgba(255, 80, 80, 0.45);
+}
 /*
 |--------------------------------------------------------------------------
 | GLAVNA VSEBINA

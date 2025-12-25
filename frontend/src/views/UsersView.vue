@@ -6,7 +6,6 @@
 //   POST   /api/users
 //   PATCH  /api/users/{id}
 //   DELETE /api/users/{id}
-// Opomba: backend že blokira admina (403) za update/delete
 // ---------------------------------------------
 
 // Uvozimo ref in onMounted za stanje in inicialno nalaganje
@@ -225,12 +224,7 @@ onMounted(fetchUsers)
 <template>
   <main class="page">
     <header class="head">
-      <h1>Users (CRUD demo)</h1>
-      <p class="muted">
-        Prikazujemo: <b>GET</b>, <b>POST</b>, <b>PATCH</b>, <b>DELETE</b> nad <code>/api/users</code>.
-        <br />
-        Opomba: admin user (is_admin=true) je na backendu zaščiten pred update/delete (403).
-      </p>
+      <h1>Users</h1>
     </header>
 
     <!-- CREATE -->

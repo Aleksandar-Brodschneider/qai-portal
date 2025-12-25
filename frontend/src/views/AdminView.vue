@@ -178,6 +178,8 @@ onMounted(async () => {
     <h1>Administrator</h1>
 
     <p v-if="okMsg" class="ok">{{ okMsg }}</p>
+    
+    
     <!-- STATUS KARTICE (neklikabilne) -->
     <section class="stats">
       <div class="stat">

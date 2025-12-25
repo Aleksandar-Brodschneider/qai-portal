@@ -21,7 +21,7 @@ const search = () => {
 
     <!-- HERO SEKCIJA -->
     <section class="hero">
-      <h1 class="title">QAI PORTAL</h1>
+      <h1 class="title">QAI RESEARCH PORTAL</h1>
 
       <p class="subtitle">
         RAZISKOVALNI PORTAL ZA KVANTNO UMETNO INTELIGENCO
@@ -171,8 +171,8 @@ const search = () => {
   padding: 12px 100px 14px 14px;
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255, 255, 255, 0.94);
-  color: inherit;
+  background:white;
+  color: #100d0d;
   font-size: 20px;
 }
 

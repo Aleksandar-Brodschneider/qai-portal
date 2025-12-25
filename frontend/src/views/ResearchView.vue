@@ -223,7 +223,7 @@ onMounted(fetchResearch)
 
 <template>
   <main class="page">
-    <h1>Research (Full CRUD)</h1>
+    <h1>Research</h1>
 
     <p class="muted">
       Prijavljen uporabnik:
