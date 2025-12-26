@@ -12,7 +12,7 @@ const search = () => {
   if (!q) return
 
   // preusmeri na /research?q=...
-  router.push({ name: 'research', query: { q } })
+  router.push({ path: '/research', query: { q } }) //search tudi za navadne uporabnike
 }
 </script>
 

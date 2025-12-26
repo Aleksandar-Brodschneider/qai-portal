@@ -8,12 +8,15 @@ import RegisterView from '../views/RegisterView.vue'
 import AdminView from '../views/AdminView.vue'
 import ResearchView from '../views/ResearchView.vue'
 import UsersView from '../views/UsersView.vue'
+import ResearchDetailView from '../views/ResearchDetailView.vue' // DODAJ
+
 
 // Definiramo poti (URL-je) v aplikaciji
 const routes = [
     { path: '/', name: 'home', component: HomeView },
     { path: '/login', name: 'login', component: LoginView },
     { path: '/register', name: 'register', component: RegisterView },
+    { path: '/research/:id', name: 'research-detail', component: ResearchDetailView },
 
     // Admin-only
     { path: '/admin', name: 'admin', component: AdminView },
@@ -29,23 +32,27 @@ const router = createRouter({
 
 // ROUTER GUARD (DEV)
 router.beforeEach((to) => {
-    const adminOnlyPrefixes = ['/admin', '/research']
+    const authOnlyPrefixes = ['/research'] // vsi prijavljeni
+    const adminOnlyPrefixes = ['/admin'] // samo admin
 
-    // Varujemo admin-only poti
+    const raw = localStorage.getItem('qai_user')
+    let user = null
+    try { user = raw ? JSON.parse(raw) : null } catch { user = null }
+
+    // auth-only
+    if (authOnlyPrefixes.some((p) => to.path.startsWith(p))) {
+        if (!user) return { path: '/login' }
+    }
+
+    // admin-only
     if (adminOnlyPrefixes.some((p) => to.path.startsWith(p))) {
-        const raw = localStorage.getItem('qai_user')
-
-        // Če ni prijave → login
-        if (!raw) return { path: '/login' }
-
-        let user = null
-        try { user = JSON.parse(raw) } catch { user = null }
-
-        // če user ne obstaja ALI ni admin → domov
-        if (!user || !user.is_admin) return { path: '/' }
+        if (!user) return { path: '/login' }
+        if (!user.is_admin) return { path: '/' }
     }
 
     return true
 })
+
+
 
 export default router

@@ -69,7 +69,13 @@ const logout = () => {
   // Preusmerimo uporabnika na začetno stran
   router.push('/')
 }
+
 </script>
+
+
+
+
+
 
 <template>
   <!-- Glavni ovoj aplikacije -->

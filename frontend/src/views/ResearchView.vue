@@ -8,6 +8,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { API_BASE } from '../config'
 import { useRoute } from 'vue-router'
+import { RouterLink } from 'vue-router'
 
 const route = useRoute()
 
@@ -30,6 +31,12 @@ const filteredItems = computed(() => {
 // Preberemo prijavljenega uporabnika
 const rawUser = localStorage.getItem('qai_user')
 const currentUser = rawUser ? JSON.parse(rawUser) : null
+
+// DODAMO, DA PRIJAVLJENI UPORABNIKI VIDIJO RAZISKAVE BREZ CRUD-a
+const isAdmin = computed(() => !!currentUser?.is_admin)
+
+
+
 
 // UX stanje
 const loading = ref(false)
@@ -221,6 +228,16 @@ const deleteResearch = async (id) => {
 onMounted(fetchResearch)
 </script>
 
+
+
+
+
+
+
+
+
+
+<!--            TEMPLATE HTML-->
 <template>
   <main class="page">
     <h1>Research</h1>
@@ -231,7 +248,7 @@ onMounted(fetchResearch)
     </p>
 
     <!-- CREATE -->
-    <section class="card">
+    <section v-if="isAdmin"   class="card"> <!-- uporabniki gledajo-->
       <h2>Nova raziskava</h2>
 
       <form class="grid" @submit.prevent="createResearch">
@@ -253,9 +270,18 @@ onMounted(fetchResearch)
       <table v-if="filteredItems.length" class="table">
         <tr v-for="r in filteredItems" :key="r.id">
           <td>{{ r.id }}</td>
-          <td>{{ r.title }}</td>
-          <td>{{ r.year }}</td>
           <td>
+            
+              <RouterLink
+                :to="{ name: 'research-detail', params: { id: r.id } }"
+                class="research-link"
+              >
+                {{ r.title }}
+              </RouterLink>
+            
+          </td>
+          <td>{{ r.year }}</td>
+          <td v-if="isAdmin"> <!--dodano za uporabnike-->
             <button class="btn" @click="startEdit(r)">Edit</button>
             <button class="btn danger" @click="deleteResearch(r.id)">Delete</button>
           </td>
@@ -266,7 +292,7 @@ onMounted(fetchResearch)
     </section>
 
     <!-- EDIT -->
-    <section v-if="editing" class="card">
+    <section v-if="isAdmin && editing" class="card">
       <h2>Uredi raziskavo</h2>
 
       <form class="grid" @submit.prevent="updateResearch">
@@ -275,7 +301,9 @@ onMounted(fetchResearch)
         <textarea v-model="editAbstract" rows="4"></textarea>
         <input v-model="editYear" type="number" />
         <input v-model="editDoi" />
+        <div class="actions">
         <button class="btn">Shrani</button>
+        </div>
       </form>
     </section>
     
@@ -283,6 +311,9 @@ onMounted(fetchResearch)
     <p v-if="okMsg" class="ok">{{ okMsg }}</p>
   </main>
 </template>
+
+
+
 
 <style scoped>
 .page { padding: 24px; display: grid; gap: 16px; }
