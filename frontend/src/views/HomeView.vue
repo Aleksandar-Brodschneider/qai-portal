@@ -1,11 +1,12 @@
 <script setup>
-import heroImg from '../assets/hero.png'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
 const query = ref('')
+
+const heroImg = `${import.meta.env.BASE_URL}hero.png`
 
 const search = () => {
   const q = query.value.trim()
