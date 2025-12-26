@@ -82,3 +82,5 @@ Frontend ni obvezen del naloge, vendar je v tem projektu dodan kot nadgradnja in
 Frontend je deployan na GitHub Pages. Zaradi deploya v podmapo
 (`/qai-portal/`) aplikacija uporablja hash routing in statične
 asset-e iz mape `public/`.
+Frontend demo (GitHub Pages):
+https://aleksandar-brodschneider.github.io/qai-portal/#/
