@@ -1,5 +1,5 @@
 // Uvozimo funkcije za router
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 // Uvozimo strani (views)
 import HomeView from '../views/HomeView.vue'
@@ -26,7 +26,7 @@ const routes = [
 
 // Ustvarimo router
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes,
 })
 

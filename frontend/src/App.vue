@@ -173,11 +173,11 @@ const logout = () => {
 
   <!-- SREDINA -->
   <nav class="footer-center">
-    <a href="#" class="footer-link">Kontakt</a>
+    <a href="#" class="footer-link">CONTACT</a>
     <span class="sep">•</span>
     <a href="#" class="footer-link">FAQ</a>
     <span class="sep">•</span>
-    <a href="#" class="footer-link">Social Media</a>
+    <a href="#" class="footer-link">SOCIAL MEDIA</a>
   </nav>
 
   <!-- DESNO -->

@@ -1,6 +1,10 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { onMounted } from 'vue'
+onMounted(() => {
+  // no-op: pomaga pri prvem renderju na nekaterih hostingih
+})
 
 const router = useRouter()
 
@@ -18,7 +22,7 @@ const search = () => {
 </script>
 
 <template>
-  <main class="home">
+  <div class="home">
 
     <!-- HERO SEKCIJA -->
     <section class="hero">
@@ -72,7 +76,7 @@ const search = () => {
       </div>
     </section>
 
-  </main>
+  </div>
 </template>
 
 <style scoped>
