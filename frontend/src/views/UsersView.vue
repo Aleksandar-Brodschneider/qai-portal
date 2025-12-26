@@ -246,10 +246,11 @@ onMounted(fetchUsers)
           <span>Geslo (min 8 znakov)</span>
           <input v-model="password" type="password" placeholder="Password123" />
         </label>
-
+      <div class="actions full">
         <button class="btn" type="submit" :disabled="loading">
           {{ loading ? 'Ustvarjam...' : 'Ustvari' }}
         </button>
+      </div>
       </form>
 
       <p v-if="errorMsg" class="error">Napaka: {{ errorMsg }}</p>
@@ -335,6 +336,7 @@ onMounted(fetchUsers)
   </main>
 </template>
 
+<!-- CSS-->
 <style scoped>
 .page { padding: 24px; display: grid; gap: 16px; }
 .head h1 { margin: 0 0 6px 0; }
@@ -378,4 +380,9 @@ th, td { border-bottom: 1px solid rgba(255,255,255,.10); padding: 10px; text-ali
 
 .error { color: #ff8a8a; margin-top: 10px; }
 .ok { color: #9dffb0; margin-top: 10px; }
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
 </style>

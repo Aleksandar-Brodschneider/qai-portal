@@ -126,15 +126,27 @@ const register = async () => {
 <style scoped>
 /* Osnovni razmik */
 .page {
-  padding: 24px;
+  min-height: calc(100vh - 220px); /* header+footer rezerva */
+  display: flex;
+  flex-direction: column;  
+  align-items: center;     /* horizontalno */
+  justify-content: center; /* vertikalno */
+  gap: 16px;
+  padding: 14px;
 }
 
-/* Kartica */
+
 .card {
+  width: 100%;
   max-width: 420px;
-  padding: 16px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 14px;
+}
+
+
+h1 {
+  margin: 0;
+  text-align: center;
 }
 
 /* Polje */

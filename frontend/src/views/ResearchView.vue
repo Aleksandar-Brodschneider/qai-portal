@@ -240,7 +240,9 @@ onMounted(fetchResearch)
         <textarea v-model="abstractText" rows="4" placeholder="Abstract"></textarea>
         <input v-model="year" type="number" />
         <input v-model="doi" placeholder="DOI" />
+      <div class="actions">
         <button class="btn">Ustvari</button>
+      </div>
       </form>
     </section>
 
@@ -292,4 +294,13 @@ input, textarea { padding: 8px; }
 .muted { opacity: .7; }
 .error { color: #ff8a8a; }
 .ok { color: #9dffb0; }
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.create-btn {
+  width: 260px;   
+  max-width: 100%;
+}
 </style>
