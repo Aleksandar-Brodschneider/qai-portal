@@ -78,4 +78,7 @@ CRUD funkcionalnost je implementirana v backend delu (Laravel REST API) in je pr
 - ter dodatno prek Vue.js frontend aplikacije, ki API uporablja.
 
 Frontend ni obvezen del naloge, vendar je v tem projektu dodan kot nadgradnja in demonstracija uporabe API-ja.
-
+### Deployment (GitHub Pages)
+Frontend je deployan na GitHub Pages. Zaradi deploya v podmapo
+(`/qai-portal/`) aplikacija uporablja hash routing in statične
+asset-e iz mape `public/`.
