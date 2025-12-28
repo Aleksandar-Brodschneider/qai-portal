@@ -84,6 +84,7 @@ Projekt je bil razvit v okviru predmeta **Spletne tehnologije** kot zaključni C
 V skladu z navodili predmeta je poudarek na:
 - pravilni zasnovi REST API-ja,
 - CRUD operacijah nad izbrano domeno (*Research*),
+
 - jasni ločitvi frontend in backend slojev.
 
 CRUD funkcionalnost je implementirana v backend delu (Laravel REST API) in je preverljiva:
@@ -91,9 +92,9 @@ CRUD funkcionalnost je implementirana v backend delu (Laravel REST API) in je pr
 - ter dodatno prek Vue.js frontend aplikacije, ki API uporablja.
 
 Frontend ni obvezen del naloge, vendar je v tem projektu dodan kot nadgradnja in demonstracija uporabe API-ja.
+
 ### Deployment (GitHub Pages)
-Frontend je deployan na GitHub Pages. Zaradi deploya v podmapo
-(`/qai-portal/`) aplikacija uporablja hash routing in statične
-asset-e iz mape `public/`.
+Frontend je deployan na GitHub Pages. Zaradi deploya v podmapo (`/qai-portal/`) aplikacija uporablja hash routing in statične asset-e iz mape `public/`.
+
 Frontend demo (GitHub Pages):
 https://aleksandar-brodschneider.github.io/qai-portal/#/
