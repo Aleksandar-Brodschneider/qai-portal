@@ -64,6 +64,19 @@ qai-portal/
 - Administratorsko omejene operacije nad vsebinami (razvojna logika)
 - Projekt v razvojni (DEV) fazi
 ---
+
+## Navigacija in uporabniška izkušnja (UX)
+
+Navigacija v frontend aplikaciji vizualno označuje trenutno aktivno stran z uporabo
+razredov `router-link-active` in `router-link-exact-active`, ki jih zagotavlja Vue Router.
+
+To izboljša orientacijo uporabnika in preglednost pri prehajanju med posameznimi pogledi
+(Home, Research, Users, Admin).
+
+Označevanje aktivne strani je izvedeno s pomočjo CSS selektorja `:deep()`, ki omogoča
+stiliranje razredov, ki jih dinamično ustvari router.
+
+
 ## Kontekst predmeta (CRUD demonstracija)
 
 Projekt je bil razvit v okviru predmeta **Spletne tehnologije** kot zaključni CRUD projekt.
